@@ -22,8 +22,8 @@ public class AssinaturaService {
   private AssinaturaRepository assinaturaRepository;
 
   @Autowired
-  public ResponseEntity criarAssinatura() {
-    return null;
+  public AssinaturaService(AssinaturaRepository assinaturaRepository) {
+    this.assinaturaRepository = assinaturaRepository;
   }
 
   @Transactional

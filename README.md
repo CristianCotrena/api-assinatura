@@ -108,7 +108,7 @@ A API faz parte de um sistema de academia com as seguintes funcionalidades:
 http://localhost:8080/swagger-ui/index.html#/
 ```
 
-⏳ Adicionado coleção inicial do POSTMAN que se encontra no diretório:
+✅ Adicionado coleção inicial do POSTMAN que se encontra no diretório:
 
 ```source-json
 /src/main/java/com/api/apiassinatura/utils/postman/
