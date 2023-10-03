@@ -21,17 +21,17 @@ public class AssinaturaCriarDto {
   )
   private Integer status;
 
-  public AssinaturaCriarDto() {
+  public AssinaturaCriarDto(
+      UUID idCliente,
+      UUID idPlano,
+      Integer status
+  ) {
     this.idCliente = idCliente;
     this.idPlano = idPlano;
     this.status = status;
   }
 
-  public AssinaturaCriarDto(
-      String uuidCliente,
-      String uuidPlano,
-      int status
-  ) {
+  public AssinaturaCriarDto() {
   }
 
   public UUID getIdCliente() {
