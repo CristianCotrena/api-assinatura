@@ -114,7 +114,7 @@ http://localhost:8080/swagger-ui/index.html#/
 /src/main/java/com/api/apiassinatura/utils/postman/
 ```
 
-⏳ Implementados Testes Unitários
+✅ Implementados Testes Unitários
 
 ✅ CRUD iniciado:
 
