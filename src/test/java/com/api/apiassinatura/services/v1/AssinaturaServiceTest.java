@@ -37,7 +37,7 @@ class AssinaturaServiceTest {
 
     dtoAssinatura = new AssinaturaRequestDto();
     dtoAssinatura.setIdCliente(UUID.fromString("123e4567-e89b-12d3-a456-426614174000"));
-    dtoAssinatura.setIdPlano(UUID.fromString("432a4567-e89b-12d3-a456-426614174000"));
+    dtoAssinatura.setIdPlano(UUID.fromString("5108babc-bf35-44d5-a9ba-de08badfa80a"));
     dtoAssinatura.setStatus(1);
 
     AssinaturaModel assinatura = new AssinaturaModel();
@@ -51,11 +51,13 @@ class AssinaturaServiceTest {
     AssinaturaModel assinatura = new AssinaturaModel();
     assinatura.setId(validUUID);
 
-    when(assinaturaRepository.findByIdCliente(any(UUID.class))).thenReturn(Optional.empty());
+    when(assinaturaRepository.existsByIdCliente(any(UUID.class))).thenReturn(
+        Optional.of(false));
     assinatura.setIdCliente(validUUID);
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
-    when(assinaturaRepository.findByIdPlano(any(UUID.class))).thenReturn(Optional.empty());
+    when(assinaturaRepository.existsByIdPlano(any(UUID.class))).thenReturn(
+        Optional.of(false));
     assinatura.setIdPlano(validUUID);
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
@@ -74,8 +76,8 @@ class AssinaturaServiceTest {
     AssinaturaModel assinatura = new AssinaturaModel();
     assinatura.setId(validUUID);
 
-    when(assinaturaRepository.findByIdCliente(any(UUID.class))).thenReturn(
-        Optional.of(assinatura));
+    when(assinaturaRepository.existsByIdCliente(any(UUID.class))).thenReturn(
+        Optional.of(true));
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
     BaseDto<AssinaturaResponseDto> responseEntity = (BaseDto<AssinaturaResponseDto>)
@@ -91,7 +93,8 @@ class AssinaturaServiceTest {
   public void testarCriarAssinaturaClienteInvalido() {
     dtoAssinatura.setIdCliente(null);
 
-    when(assinaturaRepository.findByIdCliente(any(UUID.class))).thenReturn(Optional.empty());
+    when(assinaturaRepository.existsByIdCliente(any(UUID.class))).thenReturn(
+        Optional.of(true));
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
     BaseDto<AssinaturaResponseDto> responseEntity = (BaseDto<AssinaturaResponseDto>)
@@ -104,10 +107,11 @@ class AssinaturaServiceTest {
 
   @Test
   @DisplayName("04 - Service - Criar assinatura com PLANO inválido")
-  public void testarCriarAssinaturaPlanoInvalido(){
+  public void testarCriarAssinaturaPlanoInvalido() {
     dtoAssinatura.setIdPlano(null);
 
-    when(assinaturaRepository.findByIdPlano(any(UUID.class))).thenReturn(Optional.empty());
+    when(assinaturaRepository.existsByIdCliente(any(UUID.class))).thenReturn(
+        Optional.of(true));
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
     BaseDto<AssinaturaResponseDto> responseEntity = (BaseDto<AssinaturaResponseDto>)

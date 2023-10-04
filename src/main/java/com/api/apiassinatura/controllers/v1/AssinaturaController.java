@@ -50,5 +50,4 @@ public class AssinaturaController {
   ) {
     return assinaturaService.criarAssinatura(novaAssinaturaDto);
   }
-
 }

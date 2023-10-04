@@ -10,7 +10,7 @@ import java.util.UUID;
 @Repository
 public interface AssinaturaRepository extends JpaRepository<AssinaturaModel, UUID> {
 
-  Optional<AssinaturaModel> findByIdCliente(UUID idCliente);
+  Optional<Boolean> existsByIdCliente(UUID idCliente);
 
-  Optional<AssinaturaModel> findByIdPlano(UUID idPlano);
+  Optional<Boolean> existsByIdPlano(UUID idPlano);
 }

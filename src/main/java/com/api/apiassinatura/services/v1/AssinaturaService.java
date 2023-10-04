@@ -11,6 +11,7 @@ import com.api.apiassinatura.transform.AssinaturaModelTransform;
 import com.api.apiassinatura.validations.CriarAssinaturaValidate;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,23 +36,20 @@ public class AssinaturaService {
       return new ResponseErrorBuilder(HttpStatus.BAD_REQUEST, erros).get();
     }
 
-    if (assinaturaRepository.findByIdCliente(novaAssinaturaDto.getIdCliente()).isPresent()) {
-      return new ResponseErrorBuilder(
-          HttpStatus.BAD_REQUEST,
-          "Cliente já cadastrado na assinatura!"
-      ).get();
+    Optional<Boolean> existsByIdCliente = assinaturaRepository.existsByIdCliente(
+        novaAssinaturaDto.getIdCliente());
+
+    if (existsByIdCliente.isPresent() && existsByIdCliente.get()) {
+      return new ResponseErrorBuilder(HttpStatus.BAD_REQUEST,
+          "Cliente já cadastrado na assinatura!").get();
     }
 
     AssinaturaModel novaAssinatura;
-    novaAssinatura = new AssinaturaModelTransform().transformarAssinaturaModel(
-        novaAssinaturaDto);
+    novaAssinatura = new AssinaturaModelTransform().transformarAssinaturaModel(novaAssinaturaDto);
 
     UUID idAssinatura = assinaturaRepository.save(novaAssinatura).getId();
 
-    return new ResponseSuccessBuilder<AssinaturaResponseDto>(
-        HttpStatus.CREATED,
-        new AssinaturaResponseDto(idAssinatura.toString()),
-        "Assinatura criada com sucesso!"
-    ).get();
+    return new ResponseSuccessBuilder<AssinaturaResponseDto>(HttpStatus.CREATED,
+        new AssinaturaResponseDto(idAssinatura.toString()), "Assinatura criada com sucesso!").get();
   }
 }

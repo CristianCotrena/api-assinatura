@@ -33,11 +33,11 @@ public class CriarAssinaturaValidate {
       List<BaseErrorDto> erros) {
 
     // Ids devem ser UUIDs
-    if (assinaturaRequestDto.getIdCliente() == UUID.randomUUID()) {
+    if (assinaturaRequestDto.getIdCliente().equals(UUID.randomUUID())) {
       erros.add(new BaseErrorDto("idCliente", MensagensErros.INVALID_FIELD));
     }
 
-    if (assinaturaRequestDto.getIdPlano() == UUID.randomUUID()) {
+    if (assinaturaRequestDto.getIdPlano().equals(UUID.randomUUID())) {
       erros.add(new BaseErrorDto("idPlano", MensagensErros.INVALID_FIELD));
     }
 
