@@ -3,7 +3,7 @@ package com.api.apiassinatura.entities.dtos;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.UUID;
 
-public class AssinaturaCriarDto {
+public class AssinaturaRequestDto {
 
   @Schema(
       description = "Id do cliente",
@@ -21,7 +21,7 @@ public class AssinaturaCriarDto {
   )
   private Integer status;
 
-  public AssinaturaCriarDto(
+  public AssinaturaRequestDto(
       UUID idCliente,
       UUID idPlano,
       Integer status
@@ -31,7 +31,7 @@ public class AssinaturaCriarDto {
     this.status = status;
   }
 
-  public AssinaturaCriarDto() {
+  public AssinaturaRequestDto() {
   }
 
   public UUID getIdCliente() {

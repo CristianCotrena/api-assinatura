@@ -3,10 +3,11 @@ package com.api.apiassinatura.services.v1;
 import com.api.apiassinatura.base.dtos.BaseErrorDto;
 import com.api.apiassinatura.builders.ResponseErrorBuilder;
 import com.api.apiassinatura.builders.ResponseSuccessBuilder;
-import com.api.apiassinatura.entities.dtos.AssinaturaCriarDto;
-import com.api.apiassinatura.entities.dtos.AssinaturaDto;
+import com.api.apiassinatura.entities.dtos.AssinaturaRequestDto;
+import com.api.apiassinatura.entities.dtos.AssinaturaResponseDto;
 import com.api.apiassinatura.entities.models.AssinaturaModel;
 import com.api.apiassinatura.repositories.AssinaturaRepository;
+import com.api.apiassinatura.transform.AssinaturaModelTransform;
 import com.api.apiassinatura.validations.CriarAssinaturaValidate;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -27,7 +28,7 @@ public class AssinaturaService {
   }
 
   @Transactional
-  public ResponseEntity criarAssinatura(AssinaturaCriarDto novaAssinaturaDto) {
+  public ResponseEntity criarAssinatura(AssinaturaRequestDto novaAssinaturaDto) {
     List<BaseErrorDto> erros = new CriarAssinaturaValidate().validar(novaAssinaturaDto);
 
     if (erros.size() > 0) {
@@ -41,19 +42,16 @@ public class AssinaturaService {
       ).get();
     }
 
-    AssinaturaModel novaAssinatura = new AssinaturaModel();
-
-    novaAssinatura.setIdCliente(novaAssinaturaDto.getIdCliente());
-    novaAssinatura.setIdPlano(novaAssinaturaDto.getIdPlano());
-    novaAssinatura.setStatus(1);
+    AssinaturaModel novaAssinatura;
+    novaAssinatura = new AssinaturaModelTransform().transformarAssinaturaModel(
+        novaAssinaturaDto);
 
     UUID idAssinatura = assinaturaRepository.save(novaAssinatura).getId();
 
-    return new ResponseSuccessBuilder<AssinaturaDto>(
+    return new ResponseSuccessBuilder<AssinaturaResponseDto>(
         HttpStatus.CREATED,
-        new AssinaturaDto(idAssinatura.toString()),
+        new AssinaturaResponseDto(idAssinatura.toString()),
         "Assinatura criada com sucesso!"
     ).get();
   }
-
 }

@@ -1,7 +1,7 @@
 package com.api.apiassinatura.controllers.v1;
 
 import com.api.apiassinatura.base.dtos.BaseDto;
-import com.api.apiassinatura.entities.dtos.AssinaturaCriarDto;
+import com.api.apiassinatura.entities.dtos.AssinaturaRequestDto;
 import com.api.apiassinatura.services.v1.AssinaturaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -34,6 +34,7 @@ public class AssinaturaController {
   @ApiResponse(
       responseCode = "201",
       description = "Assinatura criada com sucesso"
+
   )
   @ApiResponse(
       responseCode = "400",
@@ -45,7 +46,7 @@ public class AssinaturaController {
   )
   @PostMapping
   public ResponseEntity<BaseDto> criarAssinatura(
-      @RequestBody AssinaturaCriarDto novaAssinaturaDto
+      @RequestBody AssinaturaRequestDto novaAssinaturaDto
   ) {
     return assinaturaService.criarAssinatura(novaAssinaturaDto);
   }

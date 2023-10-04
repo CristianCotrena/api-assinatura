@@ -6,8 +6,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.api.apiassinatura.base.dtos.BaseDto;
-import com.api.apiassinatura.entities.dtos.AssinaturaCriarDto;
-import com.api.apiassinatura.entities.dtos.AssinaturaDto;
+import com.api.apiassinatura.entities.dtos.AssinaturaRequestDto;
+import com.api.apiassinatura.entities.dtos.AssinaturaResponseDto;
 import com.api.apiassinatura.entities.models.AssinaturaModel;
 import com.api.apiassinatura.repositories.AssinaturaRepository;
 import java.util.Optional;
@@ -27,7 +27,7 @@ class AssinaturaServiceTest {
 
   @Autowired
   private AssinaturaService assinaturaService;
-  private AssinaturaCriarDto dtoAssinatura;
+  private AssinaturaRequestDto dtoAssinatura;
   private AssinaturaModel assinatura;
 
   @BeforeEach
@@ -35,7 +35,7 @@ class AssinaturaServiceTest {
     assinaturaRepository = mock(AssinaturaRepository.class);
     assinaturaService = new AssinaturaService(assinaturaRepository);
 
-    dtoAssinatura = new AssinaturaCriarDto();
+    dtoAssinatura = new AssinaturaRequestDto();
     dtoAssinatura.setIdCliente(UUID.fromString("123e4567-e89b-12d3-a456-426614174000"));
     dtoAssinatura.setIdPlano(UUID.fromString("432a4567-e89b-12d3-a456-426614174000"));
     dtoAssinatura.setStatus(1);
@@ -59,7 +59,7 @@ class AssinaturaServiceTest {
     assinatura.setIdPlano(validUUID);
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
-    BaseDto<AssinaturaDto> responseEntity = (BaseDto<AssinaturaDto>)
+    BaseDto<AssinaturaResponseDto> responseEntity = (BaseDto<AssinaturaResponseDto>)
         assinaturaService.criarAssinatura(dtoAssinatura).getBody();
 
     assertEquals(HttpStatus.CREATED.value(), responseEntity.getResultado().getStatus());
@@ -78,7 +78,7 @@ class AssinaturaServiceTest {
         Optional.of(assinatura));
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
-    BaseDto<AssinaturaDto> responseEntity = (BaseDto<AssinaturaDto>)
+    BaseDto<AssinaturaResponseDto> responseEntity = (BaseDto<AssinaturaResponseDto>)
         assinaturaService.criarAssinatura(dtoAssinatura).getBody();
 
     assertEquals(HttpStatus.BAD_REQUEST.value(), responseEntity.getResultado().getStatus());
@@ -94,7 +94,7 @@ class AssinaturaServiceTest {
     when(assinaturaRepository.findByIdCliente(any(UUID.class))).thenReturn(Optional.empty());
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
-    BaseDto<AssinaturaDto> responseEntity = (BaseDto<AssinaturaDto>)
+    BaseDto<AssinaturaResponseDto> responseEntity = (BaseDto<AssinaturaResponseDto>)
         assinaturaService.criarAssinatura(dtoAssinatura).getBody();
 
     assertEquals(HttpStatus.BAD_REQUEST.value(), responseEntity.getResultado().getStatus());
@@ -110,7 +110,7 @@ class AssinaturaServiceTest {
     when(assinaturaRepository.findByIdPlano(any(UUID.class))).thenReturn(Optional.empty());
     when(assinaturaRepository.save(any(AssinaturaModel.class))).thenReturn(assinatura);
 
-    BaseDto<AssinaturaDto> responseEntity = (BaseDto<AssinaturaDto>)
+    BaseDto<AssinaturaResponseDto> responseEntity = (BaseDto<AssinaturaResponseDto>)
         assinaturaService.criarAssinatura(dtoAssinatura).getBody();
 
     assertEquals(HttpStatus.BAD_REQUEST.value(), responseEntity.getResultado().getStatus());
