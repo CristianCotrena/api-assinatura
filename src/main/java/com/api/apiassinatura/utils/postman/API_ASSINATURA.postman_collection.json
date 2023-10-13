@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "d56ce585-3e42-42bb-a6ba-2665a85838fb",
+		"name": "API_ASSINATURA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29578706"
+	},
+	"item": [
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "Cadastro - COMPLETO VÁLIDO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCliente\": \"dcb7a321-8e9d-4c6b-a5f4-2e1d3c0b7a9e\",\r\n    \"idPlano\": \"5f4e3d2c-1b0a-9d8c-7b6a-4f3e2d1c0b9a\",\r\n    \"status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/assinatura",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assinatura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro - erro - DUPLICADO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCliente\": \"2d790a4d-7c9c-4e23-9c9c-5749c5fa7fdb\",\r\n    \"idPlano\": \"c558a80a-f319-4c10-95d4-4282ef745b4b\",\r\n    \"status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/assinatura",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assinatura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro - erro - CAMPO VAZIO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/assinatura",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assinatura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro - erro - SEM UM CAMPO OBRIGATORIO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCliente\": \"\",\r\n    \"idPlano\": \"c558a80a-f319-4c10-95d4-4282ef745b4b\",\r\n    \"status\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/assinatura",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"assinatura"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UPDATE",
+			"item": []
+		},
+		{
+			"name": "DELETE",
+			"item": []
+		},
+		{
+			"name": "GET",
+			"item": []
+		}
+	]
+}
